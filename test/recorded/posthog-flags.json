@@ -1,0 +1,11 @@
+{
+  "results": [
+    { "key": "new-checkout", "active": true, "updated_at": "2026-07-01T10:00:00Z", "filters": { "groups": [{ "properties": [], "rollout_percentage": 100 }] } },
+    { "key": "old-banner", "active": false, "updated_at": "2026-05-01T10:00:00Z", "filters": { "groups": [{ "properties": [], "rollout_percentage": 50 }] } },
+    { "key": "zero-rollout", "active": true, "created_at": "2026-03-01T10:00:00Z", "updated_at": null, "filters": { "groups": [{ "properties": [], "rollout_percentage": 0 }] } },
+    { "key": "beta-users", "active": true, "updated_at": "2026-01-01T10:00:00Z", "filters": { "groups": [{ "properties": [{ "key": "email", "value": "@acme.com" }], "rollout_percentage": 100 }] } },
+    { "key": "half-rollout", "active": true, "updated_at": "2026-01-01T10:00:00Z", "filters": { "groups": [{ "properties": [], "rollout_percentage": 50 }] } },
+    { "key": "ab-test", "active": true, "updated_at": "2026-01-01T10:00:00Z", "filters": { "groups": [{ "properties": [], "rollout_percentage": 100 }], "multivariate": { "variants": [] } } },
+    { "key": "fresh-flag", "active": true, "updated_at": "2026-10-20T10:00:00Z", "filters": { "groups": [{ "properties": [], "rollout_percentage": null }] } }
+  ]
+}

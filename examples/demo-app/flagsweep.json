@@ -1,0 +1,9 @@
+{
+  "provider": "none",
+  "wrappers": ["useFlag"],
+  "include": ["src/**/*.{ts,tsx}"],
+  "flags": [
+    { "key": "new-checkout", "state": "on", "since": "2026-06-01" },
+    { "key": "old-banner", "state": "off", "since": "2026-05-10" }
+  ]
+}
