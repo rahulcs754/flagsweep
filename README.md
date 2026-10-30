@@ -2,7 +2,7 @@
 
 Removes **stale feature flags** from React and TypeScript code. It finds flags that have been fully rolled out (or turned off) for 60+ days and opens a PR that deletes the flag check and the dead branch.
 
-> Status: v0.1 MVP. Plan: [docs/MVP-PLAN.md](docs/MVP-PLAN.md).
+> Status: v0.1 MVP.
 
 ## Why
 - Old flags pile up: dead branches, confusing code, and risky "what does this flag do?" moments.
