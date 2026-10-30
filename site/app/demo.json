@@ -1,0 +1,37 @@
+[
+  {
+    "id": "if-else",
+    "title": "if / else",
+    "input": "import { useFeatureFlagEnabled } from 'posthog-js/react';\nimport { NewCheckout } from './NewCheckout';\nimport { OldCheckout } from './OldCheckout';\n\nexport function Checkout() {\n  if (useFeatureFlagEnabled('new-checkout')) {\n    return <NewCheckout />;\n  } else {\n    return <OldCheckout />;\n  }\n}\n\nexport function track(event: string) {\n  if (true) console.log('user code stays');\n  if (!useFeatureFlagEnabled('new-checkout')) {\n    console.log('old', event);\n  } else if (event === 'x') {\n    console.log('x');\n  }\n}\n",
+    "on": "import { NewCheckout } from './NewCheckout';\n\nexport function Checkout() {\n  return <NewCheckout />;\n}\n\nexport function track(event: string) {\n  if (true) console.log('user code stays');\n  if (event === 'x') {\n    console.log('x');\n  }\n}\n",
+    "off": "import { OldCheckout } from './OldCheckout';\n\nexport function Checkout() {\n  return <OldCheckout />;\n}\n\nexport function track(event: string) {\n  if (true) console.log('user code stays');\n  console.log('old', event);\n}\n"
+  },
+  {
+    "id": "ternary",
+    "title": "Ternary",
+    "input": "import posthog from 'posthog-js';\nimport { Banner } from './Banner';\n\nexport function Header() {\n  const title = posthog.isFeatureEnabled('new-checkout') ? 'Checkout v2' : 'Checkout';\n  return (\n    <header>\n      <h1>{title}</h1>\n      {posthog.isFeatureEnabled('new-checkout') ? <Banner tone=\"new\" /> : null}\n      <p className={posthog.isFeatureEnabled('new-checkout') ? 'v2' : 'v1'}>Hello</p>\n    </header>\n  );\n}\n",
+    "on": "import { Banner } from './Banner';\n\nexport function Header() {\n  const title = 'Checkout v2';\n  return (\n    <header>\n      <h1>{title}</h1>\n      <Banner tone=\"new\" />\n      <p className=\"v2\">Hello</p>\n    </header>\n  );\n}\n",
+    "off": "export function Header() {\n  const title = 'Checkout';\n  return (\n    <header>\n      <h1>{title}</h1>\n      <p className=\"v1\">Hello</p>\n    </header>\n  );\n}\n"
+  },
+  {
+    "id": "jsx-and",
+    "title": "JSX &&",
+    "input": "import { useFlag } from '../flags';\nimport { PromoBanner } from './PromoBanner';\nimport { Footer } from './Footer';\n\nexport function Page({ isAdmin }: { isAdmin: boolean }) {\n  return (\n    <main>\n      {useFlag('new-checkout') && <PromoBanner />}\n      {useFlag('new-checkout') && isAdmin && <span>admin promo</span>}\n      <Footer />\n    </main>\n  );\n}\n",
+    "on": "import { PromoBanner } from './PromoBanner';\nimport { Footer } from './Footer';\n\nexport function Page({ isAdmin }: { isAdmin: boolean }) {\n  return (\n    <main>\n      <PromoBanner />\n      {isAdmin && <span>admin promo</span>}\n      <Footer />\n    </main>\n  );\n}\n",
+    "off": "import { Footer } from './Footer';\n\nexport function Page({ isAdmin }: { isAdmin: boolean }) {\n  return (\n    <main>\n      <Footer />\n    </main>\n  );\n}\n"
+  },
+  {
+    "id": "early-return",
+    "title": "Early return",
+    "input": "import { useFeatureFlagEnabled } from 'posthog-js/react';\nimport { Chart } from './Chart';\n\nexport function Insights() {\n  const enabled = useFeatureFlagEnabled('new-checkout');\n  if (!enabled) return null;\n\n  const data = [1, 2, 3];\n  return <Chart data={data} />;\n}\n",
+    "on": "import { Chart } from './Chart';\n\nexport function Insights() {\n  const data = [1, 2, 3];\n  return <Chart data={data} />;\n}\n",
+    "off": "export function Insights() {\n  return null;\n}\n"
+  },
+  {
+    "id": "variable",
+    "title": "const variable",
+    "input": "import { useFlag } from '../flags';\nimport { Steps } from './Steps';\n\nexport function Wizard() {\n  const showSteps = useFlag('new-checkout');\n  const onNext = () => console.log('next');\n\n  if (showSteps) {\n    const step = 1;\n    console.log(step);\n  }\n\n  return (\n    <div>\n      {showSteps ? <Steps onNext={onNext} /> : <p>Single page</p>}\n    </div>\n  );\n}\n",
+    "on": "import { Steps } from './Steps';\n\nexport function Wizard() {\n  const onNext = () => console.log('next');\n\n  const step = 1;\n  console.log(step);\n\n  return (\n    <div>\n      <Steps onNext={onNext} />\n    </div>\n  );\n}\n",
+    "off": "export function Wizard() {\n  return (\n    <div>\n      <p>Single page</p>\n    </div>\n  );\n}\n"
+  }
+]
