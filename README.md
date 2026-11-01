@@ -70,6 +70,14 @@ npx flagsweep pr new-checkout --dry-run  # commit locally, no push
 
 Try it on the demo: `cd examples/demo-app && npx tsx ../../src/cli.ts scan`.
 
+## Website
+`site/` is a small Next.js page with a live before/after demo. The demo uses the real test fixtures: after changing them, run `npx tsx scripts/gen-site-demo.ts` (a test fails if you forget). Deploy on Vercel with **Root Directory = `site`**.
+
+## Release
+1. Add an npm token as the `NPM_TOKEN` repo secret.
+2. Bump `version` in package.json, then push a matching tag: `git tag v0.1.0 && git push origin v0.1.0`.
+3. The Release workflow runs the checks and publishes with npm provenance.
+
 ## Develop
 ```bash
 npm install
